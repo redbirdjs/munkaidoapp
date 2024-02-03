@@ -4,9 +4,9 @@
     <hr class="border-2 border-blue-200 rounded-lg">
     <div class="flex flex-col text-lg py-5">
       <label for="workers">Alkalmazott</label>
-      <select name="workers" id="workers" class="mb-3 text-lg p-2 rounded-lg bg-white" ng-model="wh.id">
+      <select name="workers" id="workers" class="mb-3 text-lg p-2 rounded-lg bg-white" ng-model="wh.empId">
         <option value="0" selected disabled>Válassz egy alkalmazottat</option>
-        <option ng-repeat="a in alkalmazottak" ng-selected="wh.id === a.id" value="{{a.id}}">{{a.name}}</option>
+        <option ng-repeat="a in alkalmazottak" ng-selected="wh.empId === a.id" value="{{a.id}}">{{a.name}}</option>
       </select>
       <label for="date">Dátum</label>
       <input type="date" name="date" id="date" class="mb-3 text-lg p-2 rounded-lg" ng-model="wh.date">
@@ -16,8 +16,8 @@
       <input type="time" name="end" id="end" class="mb-3 text-lg p-2 rounded-lg" ng-model="wh.end">
       <div class="flex flex-row gap-3 items-center justify-center">
         <button class="bg-blue-500 px-3 py-2 rounded-lg text-white self-center mt-3" ng-click="addWorkhour()">Hozzáadás</button>
-        <button ng-if="enUpdate" class="bg-blue-900 px-3 py-2 rounded-lg text-white self-center mt-3" ng-click="uEmployee()">Módosítás</button>
-        <button ng-if="enUpdate" class="bg-red-700 px-3 py-2 rounded-lg text-white self-center mt-3" ng-click="dEmployee()">Törlés</button>
+        <button ng-if="enUpdate" class="bg-blue-900 px-3 py-2 rounded-lg text-white self-center mt-3" ng-click="uWorkhour()">Módosítás</button>
+        <button ng-if="enUpdate" class="bg-red-700 px-3 py-2 rounded-lg text-white self-center mt-3" ng-click="dWorkhour()">Törlés</button>
       </div>
     </div>
   </div>

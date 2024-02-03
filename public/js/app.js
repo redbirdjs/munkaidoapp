@@ -25,6 +25,10 @@ app.config(function($routeProvider) {
     templateUrl: 'views/statisztika.html',
     controller: 'statisztikaCtrl'
   })
+  .when('/naptar', {
+    templateUrl: 'views/naptar.html',
+    controller: 'naptarCtrl'
+  })
   .otherwise({
     redirectTo: '/'
   });

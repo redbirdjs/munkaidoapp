@@ -17,7 +17,6 @@ app.controller('munkaidoCtrl', function($scope, $rootScope, ngNotify) {
   });
 
   $scope.addWorkhour = async function() {
-    $scope.wh.date = $scope.wh.date.toISOString();
     axios.post(`${$rootScope.backend}/workhours`, $scope.wh).then(res => {
       if (res.data.errors) {
         ngNotify.set(res.data.errors[0], 'error');
@@ -28,15 +27,28 @@ app.controller('munkaidoCtrl', function($scope, $rootScope, ngNotify) {
   }
 
   $scope.uWorkhour = async function() {
-
+    axios.patch(`${$rootScope.backend}/workhours/${$scope.wh.id}`, $scope.wh).then(res => {
+      if (res.data.errors) {
+        ngNotify.set(res.data.errors[0], 'error');
+        return;
+      }
+      window.location.reload();
+    });
   }
 
   $scope.dWorkhour = async function() {
-    
+    axios.delete(`${$rootScope.backend}/workhours/${$scope.wh.id}`).then(res => {
+      if (res.data.errors) {
+        ngNotify.set(res.data.errors[0], 'error');
+        return;
+      }
+      window.location.reload();
+    });
   }
 
   $scope.updateWorkhour = function(wh) {
-    $scope.wh.id = wh.employee.id;
+    $scope.wh.id = wh.id;
+    $scope.wh.empId = wh.employee.id;
     $scope.wh.date = new Date(wh.date);
     $scope.wh.start = new Date(wh.start);
     $scope.wh.end = new Date(wh.end);

@@ -14,7 +14,6 @@ app.controller('statisztikaCtrl', function($scope, $rootScope, ngNotify) {
     });
   }
   $scope.month = $scope.months[0];
-  console.log($scope.month);
 
   axios.get(`${$rootScope.backend}/statistics/${$scope.month.id}`).then(res => {
     $scope.statisztika = res.data;
@@ -24,7 +23,6 @@ app.controller('statisztikaCtrl', function($scope, $rootScope, ngNotify) {
   $scope.changeStats = () => {
     axios.get(`${$rootScope.backend}/statistics/${$scope.month.id}`).then(res => {
       $scope.statisztika = res.data;
-      console.log(res.data);
       $scope.$apply();
     });
   }
