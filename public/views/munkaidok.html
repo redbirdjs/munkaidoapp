@@ -1,0 +1,47 @@
+<div class="flex flex-row gap-2 h-full">
+  <div class="w-1/4 bg-stone-200 p-4 rounded-lg">
+    <h2 class="text-2xl text-center mb-3">Munkaidő felvétele</h2>
+    <hr class="border-2 border-blue-200 rounded-lg">
+    <div class="flex flex-col text-lg py-5">
+      <label for="workers">Alkalmazott</label>
+      <select name="workers" id="workers" class="mb-3 text-lg p-2 rounded-lg bg-white" ng-model="wh.id">
+        <option value="0" selected disabled>Válassz egy alkalmazottat</option>
+        <option ng-repeat="a in alkalmazottak" ng-selected="wh.id === a.id" value="{{a.id}}">{{a.name}}</option>
+      </select>
+      <label for="date">Dátum</label>
+      <input type="date" name="date" id="date" class="mb-3 text-lg p-2 rounded-lg" ng-model="wh.date">
+      <label for="start">Kezdés</label>
+      <input type="time" name="start" id="start" class="mb-3 text-lg p-2 rounded-lg" ng-model="wh.start">
+      <label for="end">Vége</label>
+      <input type="time" name="end" id="end" class="mb-3 text-lg p-2 rounded-lg" ng-model="wh.end">
+      <div class="flex flex-row gap-3 items-center justify-center">
+        <button class="bg-blue-500 px-3 py-2 rounded-lg text-white self-center mt-3" ng-click="addWorkhour()">Hozzáadás</button>
+        <button ng-if="enUpdate" class="bg-blue-900 px-3 py-2 rounded-lg text-white self-center mt-3" ng-click="uEmployee()">Módosítás</button>
+        <button ng-if="enUpdate" class="bg-red-700 px-3 py-2 rounded-lg text-white self-center mt-3" ng-click="dEmployee()">Törlés</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col w-3/4 bg-blue-200 p-4 rounded-lg">
+    <h2 class="text-2xl text-center mb-3">Munkaidők</h2>
+    <hr class="border-2 border-stone-200 rounded-lg">
+    <table class="m-3 bg-stone-200 rounded-lg p-3">
+      <thead>
+        <th class="p-3 border-b border-stone-900">#</th>
+        <th class="p-3 border-b border-stone-900">Alkalmazott neve</th>
+        <th class="p-3 border-b border-stone-900">Dátum</th>
+        <th class="p-3 border-b border-stone-900">Munkaidő kezdete</th>
+        <th class="p-3 border-b border-stone-900">Munkaidő vége</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="munkaido in munkaidok" class="cursor-pointer hover:bg-stone-400" ng-click="updateWorkhour(munkaido)">
+          <td class="p-3 text-center text-lg">{{munkaido.id}}</td>
+          <td class="p-3 text-center text-lg">{{munkaido.employee.name}}</td>
+          <td class="p-3 text-center text-lg">{{munkaido.date | date : 'yyyy-MM-dd'}}</td>
+          <td class="p-3 text-center text-lg">{{munkaido.start | date : 'HH:mm'}}</td>
+          <td class="p-3 text-center text-lg">{{munkaido.end | date : 'HH:mm'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Workhour {
+  id        Int       @id @default(autoincrement())
+  empId     Int
+  date      DateTime  @db.Date
+  start     DateTime  @db.Time(4)
+  end       DateTime  @db.Time(4)
+  employee  Employee  @relation(fields: [empId], references: [id])
+
+  @@map("workhours")
+}
+
+model Employee {
+  id           Int       @id @default(autoincrement())
+  name         String    @db.VarChar(50)
+  address      String    @db.VarChar(100)
+  position     String    @db.VarChar(100)
+  pricePerHour Int       @default(0)
+  workhour     Workhour[]
+  prepayment   Prepayment[]
+
+  @@map("employees")
+}
+
+model Prepayment {
+  id       Int      @id @default(autoincrement())
+  empId    Int
+  date     DateTime @db.Date @unique
+  amount   Int
+  employee Employee @relation(fields: [empId], references: [id])
+
+  @@map("prepayments")
+}

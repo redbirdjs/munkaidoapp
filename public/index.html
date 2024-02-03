@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="munkaidoApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{appTitle}}</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-notify/0.8.0/ng-notify.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-[100vh] flex flex-col">
+  <header class="flex flex-row justify-between px-10 py-3">
+    <h1 class="text-3xl">{{appTitle}}</h1>
+    <nav class="flex">
+      <ul class="flex flex-row gap-4 items-center justify-center">
+        <li><a class="px-4 py-2 bg-blue-200 rounded-lg hover:bg-blue-400 hover:text-white transition-colors" href="#!/">Főoldal</a></li>
+        <li><a class="px-4 py-2 bg-blue-200 rounded-lg hover:bg-blue-400 hover:text-white transition-colors" href="#!/alkalmazottak">Alkalmazottak</a></li>
+        <li><a class="px-4 py-2 bg-blue-200 rounded-lg hover:bg-blue-400 hover:text-white transition-colors" href="#!/munkaidok">Munkaidők</a></li>
+        <li><a class="px-4 py-2 bg-blue-200 rounded-lg hover:bg-blue-400 hover:text-white transition-colors" href="#!/eloleg">Előleg igénylések</a></li>
+        <li><a class="px-4 py-2 bg-blue-200 rounded-lg hover:bg-blue-400 hover:text-white transition-colors" href="#!/statisztika">Statisztika</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="p-4 grow" ng-view></main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="js/lib/angular.min.js"></script>
+  <script src="js/lib/angular-route.min.js"></script>
+  <script src="js/lib/ng-notify.min.js"></script>
+  <script src="js/app.js"></script>
+
+  <script src="js/controllers/alkalmazottCtrl.js"></script>
+  <script src="js/controllers/munkaidoCtrl.js"></script>
+  <script src="js/controllers/elolegCtrl.js"></script>
+  <script src="js/controllers/statisztikaCtrl.js"></script>
+</body>
+</html>

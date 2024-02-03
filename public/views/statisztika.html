@@ -1,0 +1,25 @@
+<div class="flex flex-col h-full bg-blue-200 rounded-lg p-4">
+  <div class="flex flex-row gap-2 mb-3">
+    <h1 class="text-2xl">Statisztika</h1>
+    <select class="px-3 py-2 bg-white text-lg rounded-lg" name="month" id="month" ng-model="month" ng-options="month as month.name for month in months track by month.id" ng-change="changeStats()"></select>
+  </div>
+  <hr class="border-2 border-stone-200 rounded-lg mb-3">
+  <table class="bg-blue-300 p-3 mx-20 rounded-lg">
+    <thead>
+      <th class="p-3 border-b border-stone-900">Alkalmazott neve</th>
+      <th class="p-3 border-b border-stone-900">Munkabér</th>
+      <th class="p-3 border-b border-stone-900">Munkaidő</th>
+      <th class="p-3 border-b border-stone-900">Fizetés (eredeti)</th>
+      <th class="p-3 border-b border-stone-900">Fizetés (levonások után)</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="stat in statisztika">
+        <td class="p-3 text-center text-lg">{{stat.name}}</td>
+        <td class="p-3 text-center text-lg">{{stat.pph | currency : 'HUF'}}</td>
+        <td class="p-3 text-center text-lg">{{stat.hours | number}} hr</td>
+        <td class="p-3 text-center text-lg">{{stat.salary | currency : 'HUF'}}</td>
+        <td class="p-3 text-center text-lg" ng-class="{'text-red-700': stat.salary - stat.overallpps < 0}">{{stat.salary - stat.overallpps | currency : 'HUF'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
