@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { GetEmployess, AddEmployee, UpdateEmployee, DeleteEmployee, getEmployeeWorkhours, addWorkhour, getStatistics, getPrepayments, updateWorkhour, deleteWorkhour, addPrepayment, updatePrepayment, deletePrepayment } from '../controllers/controller.js';
+import { GetEmployess, AddEmployee, UpdateEmployee, DeleteEmployee, getEmployeeWorkhours, addWorkhour, getStatistics, getPrepayments, updateWorkhour, deleteWorkhour, addPrepayment, updatePrepayment, deletePrepayment, calendarStats } from '../controllers/controller.js';
 
 const router = Router();
 
@@ -20,5 +20,6 @@ router.patch('/prepayments/:id', updatePrepayment);
 router.delete('/prepayments/:id', deletePrepayment);
 
 router.get('/statistics/:month', getStatistics);
+router.get('/calendarstats', calendarStats);
 
 export default router;

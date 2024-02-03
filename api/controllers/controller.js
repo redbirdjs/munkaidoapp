@@ -158,6 +158,21 @@ export const deletePrepayment = async (req, res) => {
   }
 }
 
+export const calendarStats = async (req, res) => {
+  try {
+    const prepayments = await prisma.prepayment.findMany({ include: { employee: true } });
+
+    const pps = prepayments.map((pp) => {
+      return { name: pp.employee.name, date: pp.date, amount: pp.amount }
+    });
+
+    res.send({ prepayments: pps, payments: ps });
+  } catch (e) {
+    if (e) console.error(e);
+    res.send({ msg: 'hiba történt!', errors: ['Adatbázis hiba történt, több infóért nézd meg a consolet.'] });
+  }
+}
+
 export const getStatistics = async (req, res) => {
   const { month } = req.params;
 
