@@ -67,11 +67,11 @@ export const getEmployeeWorkhours = async(req, res) => {
 }
 
 export const addWorkhour = async (req, res) => {
-  const { id, date, start, end } = req.body;
+  const { empId, date, start, end } = req.body;
 
   try {
     await prisma.workhour.create({ data: {
-      empId: Number(id), date, start, end
+      empId: Number(empId), date, start, end
     } });
 
     res.send({ msg: 'hozzáadva!' });
@@ -160,13 +160,18 @@ export const deletePrepayment = async (req, res) => {
 
 export const calendarStats = async (req, res) => {
   try {
+    const workhours = await prisma.workhour.findMany({ include: { employee: true } });
     const prepayments = await prisma.prepayment.findMany({ include: { employee: true } });
+
+    const whs = workhours.map((wh) => {
+      return { name: wh.employee.name, date: wh.date, start: wh.start, end: wh.end }
+    });
 
     const pps = prepayments.map((pp) => {
       return { name: pp.employee.name, date: pp.date, amount: pp.amount }
     });
 
-    res.send({ prepayments: pps, payments: ps });
+    res.send({ workhours: whs, prepayments: pps });
   } catch (e) {
     if (e) console.error(e);
     res.send({ msg: 'hiba történt!', errors: ['Adatbázis hiba történt, több infóért nézd meg a consolet.'] });

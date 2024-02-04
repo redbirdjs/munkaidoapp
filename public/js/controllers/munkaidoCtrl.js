@@ -18,6 +18,7 @@ app.controller('munkaidoCtrl', function($scope, $rootScope, ngNotify) {
 
   $scope.addWorkhour = async function() {
     axios.post(`${$rootScope.backend}/workhours`, $scope.wh).then(res => {
+      console.log($scope.wh);
       if (res.data.errors) {
         ngNotify.set(res.data.errors[0], 'error');
         return;
